@@ -1,2 +1,0 @@
-stepzen import curl 'https://api.api-ninjas.com/v1/exercises?muscle=chest' \
-  -H "X-API-Key: aBr+slTBikDkYKjasID9cQ==VZoea6kUTxb8nqVl"
