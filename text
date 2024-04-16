@@ -1,0 +1,38 @@
+username: davidjeremiasfigueroa
+
+pw: btaOiypjqr4hj245
+
+
+
+mongoDB stepzen api key
+e4ByxHA3n3pGHDg7U2ac4sAkftUfFITWzwhMWRg3NDXxE3xqe4GqiYK8vJKAF9yR
+
+
+
+stepzen import curl --request POST 'https://eu-central-1.aws.data.mongodb-api.com/app/data-kkemc/endpoint/data/v1/action/find' \
+--header 'Content-Type: application/json' \
+--header 'Access-Control-Request-Headers: *' \
+--header 'api-key: e4ByxHA3n3pGHDg7U2ac4sAkftUfFITWzwhMWRg3NDXxE3xqe4GqiYK8vJKAF9yR' \
+--data-raw '{
+    "collection":"sets",
+    "database":"workouts",
+    "dataSource":"Cluster0"
+}'
+
+
+stepzen import curl "https://eu-central-1.aws.data.mongodb-api.com/app/data-kkemc/endpoint/data/v1/action/insertOne" \
+  -X POST \
+  -H "apiKey: e4ByxHA3n3pGHDg7U2ac4sAkftUfFITWzwhMWRg3NDXxE3xqe4GqiYK8vJKAF9yR" \
+  -H 'Content-Type: application/json' \
+  -H "Accept: application/json" \
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "Are you working?",
+      "weight": 4,
+      "reps": 1
+    }
+  }'
+ 
