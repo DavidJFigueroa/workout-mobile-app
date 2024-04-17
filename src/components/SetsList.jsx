@@ -4,8 +4,8 @@ import {useQuery} from "@tanstack/react-query";
 import client from "../graphqlClient";
 
 const setQuery = gql`
-  query exercises {
-    sets {
+  query sets($exercise: String) {
+    sets(exercise: $exercise) {
       documents {
         _id
         exercise
@@ -16,10 +16,10 @@ const setQuery = gql`
   }
 `;
 
-const SetsList = ({ListHeaderComponent}) => {
+const SetsList = ({ListHeaderComponent, exerciseName}) => {
   const {data, isLoading, error} = useQuery({
-    queryKey: ["sets"],
-    queryFn: () => client.request(setQuery),
+    queryKey: ["sets", exerciseName],
+    queryFn: () => client.request(setQuery, {exercise: exerciseName}),
   });
 
   if (isLoading) {

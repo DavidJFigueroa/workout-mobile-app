@@ -16,7 +16,8 @@ stepzen import curl --request POST 'https://eu-central-1.aws.data.mongodb-api.co
 --data-raw '{
     "collection":"sets",
     "database":"workouts",
-    "dataSource":"Cluster0"
+    "dataSource":"Cluster0",
+    "filter":{"exercise":"Weighted pull-up"}
 }'
 
 

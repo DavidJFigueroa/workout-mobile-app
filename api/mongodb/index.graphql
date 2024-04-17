@@ -10,7 +10,7 @@ type Root {
 }
 
 type Query {
-  sets: Root
+  sets(exercise: String): Root
     @rest(
       method: POST
       endpoint: "https://eu-central-1.aws.data.mongodb-api.com/app/data-kkemc/endpoint/data/v1/action/find"
@@ -20,12 +20,13 @@ type Query {
           name: "api-key"
           value: "e4ByxHA3n3pGHDg7U2ac4sAkftUfFITWzwhMWRg3NDXxE3xqe4GqiYK8vJKAF9yR"
         }
-      ],
+      ]
       postbody: """
       {
         "collection":"sets",
         "database":"workouts",
-        "dataSource":"Cluster0"
+        "dataSource":"Cluster0",
+        "filter":{"exercise":"{{.Get "exercise"}}"}
       }
       """
     )
