@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {View, StyleSheet, TextInput, Button, Text} from "react-native";
 import {gql} from "graphql-request";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import client from "../graphqlClient";
 
 const mutationDocument = gql`
@@ -21,13 +21,18 @@ const NewSetInput = ({exerciseName}) => {
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
 
+  const queryClient = useQueryClient();
+
   const {mutate, error, isError, isPending} = useMutation({
     mutationFn: (newSet) => client.request(mutationDocument, {newSet}),
+    onSuccess: () => {
+      setReps("");
+      setWeight("");
+      queryClient.invalidateQueries({queryKey: ["sets", exerciseName]});
+    },
   });
 
   const addSet = () => {
-    console.warn("Add set:", reps, weight);
-
     const newSet = {
       exercise: exerciseName,
       reps: Number.parseInt(reps),
@@ -37,8 +42,6 @@ const NewSetInput = ({exerciseName}) => {
       newSet.weight = Number.parseFloat(weight);
     }
     mutate(newSet);
-    setReps("");
-    setWeight("");
   };
 
   if (error) {

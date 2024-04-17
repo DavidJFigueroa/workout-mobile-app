@@ -1,6 +1,6 @@
 import {View, Text, ActivityIndicator, FlatList} from "react-native";
 import {gql} from "graphql-request";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import client from "../graphqlClient";
 
 const setQuery = gql`
